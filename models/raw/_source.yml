@@ -18,15 +18,13 @@ sources:
        - name: ROW_ID
          description: Row ID unique to scraping job (meaningless outside of the import context)
        - name: ID
-         description: USTA match ID
-         tests:
-          - unique
-          - not_null
+         description: Deprecated - match ID
        - name: MATCH_DATE
          description: Match date
        - name: MATCH_TYPE
          description: Type of match
          tests:
+          - not_null
           - accepted_values:
               values: ['doubles', 'singles']
        - name: WON
@@ -44,4 +42,4 @@ sources:
        - name: LEVEL
          description: NTRP level
        - name: CUM_SUM
-         description: Cumulative sum of WON
+         description: Deprecated - cumulative sum of WON
