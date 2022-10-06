@@ -1,0 +1,15 @@
+version: 2
+
+models:
+ - name: stg_match_results
+   tests:
+    - dbt_utils.unique_combination_of_columns:
+        combination_of_columns:
+          - 'match_date'
+          - 'league_level'
+          - 'match_type'
+          - 'winner1'
+          - 'winner2'
+          - 'loser1'
+          - 'loser2'
+          - 'score'

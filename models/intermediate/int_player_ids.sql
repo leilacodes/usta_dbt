@@ -1,7 +1,7 @@
 with player_names as (
     select distinct 
         player_name
-    from {{ ref('int_match_results') }}
+    from {{ ref('players') }}
 )
 
 , final as (

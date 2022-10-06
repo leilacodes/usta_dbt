@@ -1,3 +1,5 @@
+{{ config(materialized='table')}}
+
 with pivoted as (
     select distinct * from (
     {{
@@ -19,19 +21,37 @@ with pivoted as (
 -- logical CTEs
 , match_defaults as (
     select 
-        *
-    from pivoted 
-    where 1=1
-    and score = '6-0, 6-0'
-    and player_name is NULL
+        pivoted.* 
+    from pivoted
+    inner join (
+        select 
+            *
+        from pivoted 
+        where 1=1
+        and score = '6-0, 6-0'
+        and player_name is NULL
+    ) using (match_date, match_type, score, league_level)
+    
+)
+
+, non_defaults_only as (
+    select * from pivoted
+    minus
+    select * from match_defaults
 )
 
 , final as (
-    select  
-        *
-    from pivoted
-    minus 
-    (select * from match_defaults)
+    select distinct
+        match_date,
+        match_type,
+        score,
+        league_level,
+        case
+            when player_result like 'WIN%' then 'WON'
+            when player_result like 'LOS%' then 'LOST'
+        end as player_result,
+        player_name
+    from non_defaults_only
 )
 
 select * from final
