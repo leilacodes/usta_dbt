@@ -1,12 +1,6 @@
 version: 2
 
 sources:
-  - name: jaffle_shop
-    database: raw
-    schema: jaffle_shop
-    tables:
-     - name: customers
-     - name: orders
   - name: usta
     description: Data scraped from USTA website in 2019 using deprecated script
     database: raw
@@ -40,6 +34,6 @@ sources:
        - name: SCORE
          description: Text string of match score
        - name: LEVEL
-         description: NTRP level
+         description: Deprecated (inaccurate) - NTRP level
        - name: CUM_SUM
          description: Deprecated - cumulative sum of WON

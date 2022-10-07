@@ -13,3 +13,10 @@ models:
           - 'loser1'
           - 'loser2'
           - 'score'
+   columns:
+    - name: match_id
+      description: Hashed combination of match date, league level, match type, winner(s), and loser(s)
+      tests:
+       - unique
+         config:
+           store_failures: true

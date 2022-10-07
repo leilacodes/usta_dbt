@@ -20,7 +20,7 @@ with matches as (
         player_id,
         player_name,
         match_type,
-        year(match_date) as match_year,
+        cast(year(match_date) as int) as match_year,
         sum(case when player_result = 'WON' then 1 else 0 end) as matches_won,
         sum(case when player_result = 'LOST' then 1 else 0 end) as matches_lost,
         matches_won + matches_lost as matches_played,
@@ -28,7 +28,7 @@ with matches as (
         matches_lost / matches_played as lose_pct
     from player_matches
     group by 1,2,3,4
-    order by player_id
+    order by player_id, match_year, match_type
 )
 
 select * from winloss
