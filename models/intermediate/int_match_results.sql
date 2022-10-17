@@ -6,7 +6,8 @@ with pivoted as (
         dbt_utils.unpivot(
             relation=ref('stg_match_results'),
             cast_to='varchar',
-            exclude=['match_date',
+            exclude=['match_id',
+                        'match_date',
                         'match_type',
                         'score',
                         'league_level'],
@@ -15,7 +16,7 @@ with pivoted as (
         )
     }}
     )
-    order by match_date, match_type, league_level, score, player_result   
+    order by match_id, match_date, match_type, league_level, score, player_result   
 )
 
 -- logical CTEs

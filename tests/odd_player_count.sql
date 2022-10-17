@@ -1,4 +1,4 @@
-{{ config(severity='warn', warn_if='>0', store_failures='true')}}
+{{ config(severity='error', warn_if='>0', error_if='>10', store_failures=true) }}
 
 with all_matches as (
     select * from {{ ref('int_match_results') }}

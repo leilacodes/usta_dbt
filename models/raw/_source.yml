@@ -8,6 +8,9 @@ sources:
     tables:
     - name: player_results
       description: Player match records from 2013 - mid-2019
+      freshness: 
+       warn_after: {count: 365, period: day}
+      loaded_at_field: match_date
       columns:
        - name: ROW_ID
          description: Row ID unique to scraping job (meaningless outside of the import context)
